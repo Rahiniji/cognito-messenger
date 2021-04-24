@@ -1,5 +1,3 @@
-# messenger
-
 # Sample messenger application ##
 
 ## Mocked old messages to illustrate the messages received from friend. 
