@@ -5,7 +5,7 @@ import './App.css';
 
 function App() {
   const [userMessages, setUserMessages] = useState([]);
-  const [clientMessages, setClientMessages] = useState(['Hi..', 'How are you, buddy?']); // Hard coding old chat messages from friend
+  const [clientMessages] = useState(['Hi..', 'How are you, buddy?']); // Hard coding old chat messages from friend
   const [newMessage, setNewMessage] = useState('');
 
   const messageInput = useRef(null);
@@ -20,6 +20,7 @@ function App() {
 
   const handleChange = (e) => {
     e.preventDefault();
+    console.log(e.target.value);
     setNewMessage(e.target.value)
   }
 
@@ -27,9 +28,22 @@ function App() {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
   const submitMessage = () => {
-    newMessage && setUserMessages(state => [...state, newMessage.trim()]);
+    newMessage && setUserMessages(state => [...state, newMessage]);
     messageInput.current.focus(); // setting focus back to the field where user types
     setNewMessage('');
+  }
+
+  const getFormatted = (um) => {
+    const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    var parser = new DOMParser();
+
+    const result = um.replace(urlRegex, function (url) {
+      return '<a target="_blank" href="' + url + '">' + url + '</a>';
+    });
+    var htmlDoc = parser.parseFromString(result, 'text/html');
+
+    console.log('hd1', htmlDoc);
+    return result;
   }
   return (
     <div className="App">
@@ -94,6 +108,7 @@ function App() {
             <Box key={index} style={{
               width: 'fit-content',
               float: 'right',
+              whiteSpace: 'pre'
             }}>
               <Paper elevation={3} style={{
                 padding: '0.5rem', border: '2px solid #9B2335',
@@ -101,7 +116,7 @@ function App() {
               >
                 <i className="fa fa-user-circle-o" aria-hidden="true" style={{ color: '#9B2335' }}></i>
                 <br></br>
-                {um}
+                {<div dangerouslySetInnerHTML={{ __html: `${getFormatted(um)}` }} />}
               </Paper>
             </Box>
           ))}
