@@ -21,16 +21,17 @@ function App() {
   const handleChange = (e) => {
     e.preventDefault();
     console.log(e.target.value);
-    setNewMessage(e.target.value)
+    setNewMessage(e.target.value);
   }
 
   const handleToggleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
   const submitMessage = () => {
-    newMessage && setUserMessages(state => [...state, newMessage]);
+    setUserMessages([...userMessages, newMessage.trim()]);
     messageInput.current.focus(); // setting focus back to the field where user types
     setNewMessage('');
+
   }
 
   const getFormatted = (um) => {
@@ -54,7 +55,7 @@ function App() {
 
 
       </header>
-      <Typography variant="h4" style={{ textAlign: 'center', color: '#45B8AC', margin: '1rem auto' }}>Cognite Messenger App</Typography>
+      <Typography variant="h4" style={{ textAlign: 'center', color: '#45B8AC', margin: '1rem auto' }}>Messenger</Typography>
 
       <Switch
         checked={state.checkedEnter}
@@ -73,6 +74,7 @@ function App() {
       }}>
 
 
+
         {clientMessages.length > 0 && (
           <Box style={{
             float: 'left', margin: '1rem', display: 'flex', flexDirection: 'column',
@@ -81,7 +83,9 @@ function App() {
 
             {clientMessages.map((cm, index) => (
 
-              <Box key={index} style={{ width: 'fit-content' }}>
+              <Box
+                key={index}
+                style={{ width: 'fit-content' }}>
 
                 <Paper elevation={3} style={{ padding: '0.5rem', border: '2px solid #EFC050' }}
                 >
@@ -98,7 +102,8 @@ function App() {
 
         <Box className="User-message-box" style={{
 
-          float: 'right', margin: '1rem',
+
+          margin: '1rem',
           display: 'flex',
           flexDirection: 'column',
           gap: '1rem',
@@ -107,7 +112,6 @@ function App() {
           {userMessages.map((um, index) => (
             <Box key={index} style={{
               width: 'fit-content',
-              float: 'right',
               whiteSpace: 'pre'
             }}>
               <Paper elevation={3} style={{
@@ -117,6 +121,7 @@ function App() {
                 <i className="fa fa-user-circle-o" aria-hidden="true" style={{ color: '#9B2335' }}></i>
                 <br></br>
                 {<div dangerouslySetInnerHTML={{ __html: `${getFormatted(um)}` }} />}
+
               </Paper>
             </Box>
           ))}
@@ -130,7 +135,11 @@ function App() {
           <TextareaAutosize aria-label="empty textarea" placeholder=""
             onChange={handleChange}
             onKeyPress={(e) => {
-              state.checkedEnter && newMessage && e.key === 'Enter' && submitMessage();
+              state.checkedEnter &&
+                newMessage && newMessage.trim() &&
+                e.key === 'Enter'
+                && submitMessage();
+
             }}
             value={newMessage}
             ref={messageInput}
@@ -152,7 +161,9 @@ function App() {
         </Box>
 
       </div>
+
     </div >
+
   );
 }
 
