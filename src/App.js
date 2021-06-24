@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Box, Paper, TextareaAutosize, Typography, Switch } from '@material-ui/core';
-import logo from './images/logo-cognite.png'
+import logo from './images/doodle-logo.png'
 import './App.css';
 
 function App() {
