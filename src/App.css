@@ -26,11 +26,12 @@
   color: #61dafb;
 }
 
-.Content-container {
+.content-container {
   margin: 'auto 1rem';
   height: 'auto';
   width: '90%';
   border: '3px solid #45B8AC'
+  
 }
 
 .User-message-box{
