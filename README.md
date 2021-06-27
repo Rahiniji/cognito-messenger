@@ -24,6 +24,7 @@
 * On sending message, POST API call is triggered to feed the new message. It responds back with the same message, which could be used to display in the history
 * Observation: One discrepancy in Back end response: Data type of timestamp is Number in GET API, whereas it is String in POST API. To resolve this, UI code handles the type conversion to show date expected format
 * Included background image. Loading indicator(GIF) is shown till all the messages get loaded completely
+* Tested in major browsers: Google Chrome, Safari, Edge
 
 * Improvements foreseen: More modularity for API Calls and CSS
 
