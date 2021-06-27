@@ -132,7 +132,7 @@ function App() {
           margin: "1rem",
           display: "flex",
           flexDirection: "column",
-          gap: "1rem",
+          gap: "0.5rem",
           border: "4px solid #45B8AC",
           backgroundImage: `url('${background}')`,
         }}
@@ -151,10 +151,10 @@ function App() {
               <Box
                 className="User-message-box"
                 style={{
-                  margin: "1rem",
+                  // margin: "1rem",
                   display: "flex",
                   flexDirection: "column",
-                  gap: "1rem",
+                  gap: "0.5rem",
                   alignItems:
                     tm.author === currentAuthorName ? "flex-end" : "unset",
                 }}
